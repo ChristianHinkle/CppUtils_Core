@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include <CppCoreConcepts/CppCoreConcepts.h>
+#include <CppUtils_Concepts/CppUtils_Concepts.h>
 
-namespace CppCoreUtils
+namespace CppUtils::Core
 {
     /**
      * @brief Materialize a prvalue to a temporary and get an lvalue reference to it.
@@ -13,12 +13,12 @@ namespace CppCoreUtils
      * @param inTemporary The caller's prvalue argument materialized to temporary.
      * @return Lvalue reference to the temporary.
      */
-    template <CppCoreConcepts::NonLvalueReference T>
+    template <CppUtils::Concepts::NonLvalueReference T>
     T& Materialize(T&& inTemporary);
 }
 
-template <CppCoreConcepts::NonLvalueReference T>
-T& CppCoreUtils::Materialize(T&& inTemporary)
+template <CppUtils::Concepts::NonLvalueReference T>
+T& CppUtils::Core::Materialize(T&& inTemporary)
 {
     // Note that the temporary gets promoted to an lvalue for the scope of this function. It
     // will revert to its original lifetime of temporary when this function is exited.

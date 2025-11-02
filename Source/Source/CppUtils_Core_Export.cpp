@@ -1,3 +1,3 @@
 // Copyright (c) 2023-2025 Christian Hinkle, Brian Hinkle.
 
-#include <CppCoreUtils/CppCoreUtils.h>
+#include <CppUtils_Core_Export.h>
