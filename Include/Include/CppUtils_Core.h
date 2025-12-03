@@ -15,6 +15,15 @@ namespace CppUtils::Core
      */
     template <CppUtils::Concepts::NonLvalueReference T>
     T& Materialize(T&& inTemporary);
+
+    /**
+     * @brief A software implementation of the IEEE 754 standard's divide operation to support special
+     *        cases like NaN and inf values.
+     * @todo @Christian TODO: [todo][cpp] Convert this to a constexpr function, as it is basic arithmetic.
+     */
+    float IeeeDivide(float dividend, float divisor);
+    double IeeeDivide(double dividend, double divisor);
+    long double IeeeDivide(long double dividend, long double divisor);
 }
 
 template <CppUtils::Concepts::NonLvalueReference T>

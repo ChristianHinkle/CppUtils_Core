@@ -21,3 +21,16 @@ project(${MY_BASE_PROJECT_NAME_FULL}_Tests
 # means we'll have all their targets. Also, the targets that we reference in `target_link_libraries` commands don't
 # even need to exist yet because CMake only validates the existence of targets at the end of the entire
 # configuration process.
+
+add_executable(IeeeDivide)
+target_compile_features(IeeeDivide PUBLIC cxx_std_20)
+target_sources(IeeeDivide PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/IeeeDivide.cpp")
+target_link_libraries(IeeeDivide
+  PRIVATE
+    ${MY_BASE_PROJECT_NAME_NAMESPACE}::${MY_BASE_PROJECT_NAME_LEAFNAME}::Static
+    CppUtils::Concepts::Include
+  )
+
+add_test(NAME CppUtils.Core.IeeeDivide
+  COMMAND IeeeDivide
+  )
