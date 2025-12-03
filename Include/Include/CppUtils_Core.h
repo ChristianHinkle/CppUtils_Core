@@ -21,15 +21,8 @@ namespace CppUtils::Core
      *        cases like NaN and inf values.
      * @todo @Christian TODO: [todo][cpp] Convert this to a constexpr function, as it is basic arithmetic.
      */
-    float IeeeDivide(float dividend, float divisor);
-    double IeeeDivide(double dividend, double divisor);
-    long double IeeeDivide(long double dividend, long double divisor);
+    template <CppUtils::Concepts::Std::floating_point TFloat>
+    TFloat IeeeDivide(TFloat dividend, TFloat divisor);
 }
 
-template <CppUtils::Concepts::NonLvalueReference T>
-constexpr T& CppUtils::Core::Materialize(T&& inTemporary)
-{
-    // Note that the temporary gets promoted to an lvalue for the scope of this function. It
-    // will revert to its original lifetime of temporary when this function is exited.
-    return static_cast<T&>(inTemporary);
-}
+#include <CppUtils_Core.inl>
