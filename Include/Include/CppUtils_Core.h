@@ -14,7 +14,7 @@ namespace CppUtils::Core
      * @return Lvalue reference to the temporary.
      */
     template <CppUtils::Concepts::NonLvalueReference T>
-    T& Materialize(T&& inTemporary);
+    constexpr T& Materialize(T&& inTemporary);
 
     /**
      * @brief A software implementation of the IEEE 754 standard's divide operation to support special
@@ -27,7 +27,7 @@ namespace CppUtils::Core
 }
 
 template <CppUtils::Concepts::NonLvalueReference T>
-T& CppUtils::Core::Materialize(T&& inTemporary)
+constexpr T& CppUtils::Core::Materialize(T&& inTemporary)
 {
     // Note that the temporary gets promoted to an lvalue for the scope of this function. It
     // will revert to its original lifetime of temporary when this function is exited.
