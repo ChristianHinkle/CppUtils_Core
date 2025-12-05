@@ -20,7 +20,7 @@ TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
 {
     // Note: We make sure that each return case is abiding by the NaNs-always-propagate rule.
 
-    static_assert(-0.f == 0.f, "I believe equality of opposite-signed zeroes is standardized, but let's make sure.");
+    static_assert(-0.f == 0.f, "It is a C standard that positive and negative zeroes compare equal, according to https://cppreference.com/w/c/language/operator_comparison.html. It's also required by the IEEE 754 section 5.11 standard.");
 
     if (divisor == static_cast<TFloat>(0))
     {
@@ -66,6 +66,6 @@ TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
             dividend * std::copysign(static_cast<TFloat>(1), divisor));
     }
 
-    // Note: The potential NaN values from our parameters will naturally propagate in this case.
+    // Note: The potential NaN values from our parameters will naturally propagate in this case, so we are NaNs-always-propagate rule compliant.
     return dividend / divisor;
 }
