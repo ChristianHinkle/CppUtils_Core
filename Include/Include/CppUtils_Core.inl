@@ -22,10 +22,10 @@ TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
 
     static_assert(-0.f == 0.f, "I believe equality of opposite-signed zeroes is standardized, but let's make sure.");
 
-    if (divisor == 0)
+    if (divisor == static_cast<TFloat>(0))
     {
         // If both the divisor and dividend are zero values, return a NaN.
-        if (dividend == 0)
+        if (dividend == static_cast<TFloat>(0))
         {
             return std::numeric_limits<TFloat>::quiet_NaN();
         }
@@ -41,7 +41,7 @@ TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
         // If the divisor is -0, return inf with the opposite sign of the dividend.
         return std::copysign(
             std::numeric_limits<TFloat>::infinity(),
-            dividend * std::copysign(1, divisor));
+            dividend * std::copysign(static_cast<TFloat>(1), divisor));
     }
 
     if (std::isinf(divisor))
@@ -63,7 +63,7 @@ TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
         // If the divisor is -inf, return 0 with the opposite sign of the dividend.
         return std::copysign(
             static_cast<TFloat>(0),
-            dividend * std::copysign(1, divisor));
+            dividend * std::copysign(static_cast<TFloat>(1), divisor));
     }
 
     // Note: The potential NaN values from our parameters will naturally propagate in this case.
