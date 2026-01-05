@@ -99,6 +99,7 @@ block(SCOPE_FOR VARIABLES)
   set(MyTargetSources
     "${MY_BASE_PROJECT_NAME_FULL}_Export.cpp"
     "CppUtils_Core.cpp"
+    "Concepts.cpp"
     )
 
   # Add source file paths for `BUILD_LOCAL_INTERFACE` users.
