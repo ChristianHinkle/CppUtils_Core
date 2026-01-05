@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <CppUtils_Concepts.h>
+#include <CppUtils_Core/Concepts.h>
 
 namespace CppUtils::Core
 {
@@ -13,7 +13,7 @@ namespace CppUtils::Core
      * @param inTemporary The caller's prvalue argument materialized to temporary.
      * @return Lvalue reference to the temporary.
      */
-    template <CppUtils::Concepts::NonLvalueReference T>
+    template <CppUtils::Core::Concepts::NonLvalueReference T>
     constexpr T& Materialize(T&& inTemporary);
 
     /**
@@ -24,7 +24,7 @@ namespace CppUtils::Core
      *       constexpr yet, or (2) wait for C++23 which will make many of the `std` functions `constexpr`. I'm just going
      *       to wait for C++23 support, unless we really need to have this for some reason.
      */
-    template <CppUtils::Concepts::Std::floating_point TFloat>
+    template <CppUtils::StdReimpl::Concepts::floating_point TFloat>
     TFloat IeeeDivide(TFloat dividend, TFloat divisor);
 }
 
