@@ -28,7 +28,6 @@ target_sources(IeeeDivide PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/IeeeDivide
 target_link_libraries(IeeeDivide
   PRIVATE
     ${MY_BASE_PROJECT_NAME_NAMESPACE}::${MY_BASE_PROJECT_NAME_LEAFNAME}::Static
-    CppUtils::StdReimpl::Include
   )
 
 add_test(NAME CppUtils.Core.IeeeDivide
@@ -41,7 +40,6 @@ target_sources(NonLvalueReference PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/No
 target_link_libraries(NonLvalueReference
   PRIVATE
     ${MY_BASE_PROJECT_NAME_NAMESPACE}::${MY_BASE_PROJECT_NAME_LEAFNAME}::Include
-    CppUtils::StdReimpl::Include
   )
 
 add_test(
