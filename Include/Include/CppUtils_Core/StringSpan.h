@@ -19,6 +19,11 @@ namespace CppUtils::Core
     {
     public:
 
+        using traits_type = TTraits;
+        using value_type = TChar;
+
+    public:
+
         constexpr StringSpan() noexcept = default;
         constexpr StringSpan(const StringSpan& other) noexcept = default;
         constexpr StringSpan& operator=(const StringSpan& other) noexcept = default;
@@ -48,7 +53,7 @@ namespace CppUtils::Core
 
         std::basic_string_view<TChar, TTraits> ToStringView() const
         {
-            return std::basic_string_view(CharSpan.data(), CharSpan.size());
+            return {CharSpan.data(), CharSpan.size()};
         }
 
     private:
