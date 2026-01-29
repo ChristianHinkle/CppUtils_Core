@@ -101,6 +101,7 @@ block(SCOPE_FOR VARIABLES)
     "CppUtils_Core.cpp"
     "Concepts.cpp"
     "Raii.cpp"
+    "StringSpan.cpp"
     )
 
   # Add source file paths for `BUILD_LOCAL_INTERFACE` users.

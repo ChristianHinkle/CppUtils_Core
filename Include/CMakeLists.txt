@@ -91,6 +91,7 @@ target_sources(${MY_BASE_PROJECT_NAME_FULL}_Include
         "${CMAKE_CURRENT_SOURCE_DIR}/Include/CppUtils_Core.inl"
         "${CMAKE_CURRENT_SOURCE_DIR}/Include/CppUtils_Core/Concepts.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/Include/CppUtils_Core/Raii.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Include/CppUtils_Core/StringSpan.h"
   )
 
 # Note that we do not "find package" for our parent project. We don't need to since we are built in the same
