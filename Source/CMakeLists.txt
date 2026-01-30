@@ -104,7 +104,7 @@ block(SCOPE_FOR VARIABLES)
     message(FATAL_ERROR "The files include did not define the variable `FILES_CMAKE_RESULT` for us to use.")
   endif()
 
-  # List out all our source files, relative to our "Source" directory.
+  # List out all our source files, relative to our "Files" directory.
   set(MyTargetSources
     ${FILES_CMAKE_RESULT}
     )
@@ -116,7 +116,7 @@ block(SCOPE_FOR VARIABLES)
   block(SCOPE_FOR VARIABLES)
     # Wrap each source file path in the conditional generator expression.
     set(MyTargetSourcesBuildLocalInterface ${MyTargetSources})
-    list(TRANSFORM MyTargetSourcesBuildLocalInterface PREPEND "$<BUILD_LOCAL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Source/")
+    list(TRANSFORM MyTargetSourcesBuildLocalInterface PREPEND "$<BUILD_LOCAL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Files/")
     list(TRANSFORM MyTargetSourcesBuildLocalInterface APPEND ">")
 
     target_sources(${MY_BASE_PROJECT_NAME_FULL}_Source

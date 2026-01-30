@@ -93,7 +93,7 @@ target_sources(${MY_BASE_PROJECT_NAME_FULL}_Include
     FILE_SET ${MY_BASE_PROJECT_NAME_FULL_LOWERCASE}_include_interface_headers
       TYPE HEADERS
       BASE_DIRS
-        "${CMAKE_CURRENT_SOURCE_DIR}/Include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Files"
       FILES
         ${FILES_CMAKE_RESULT}
   )

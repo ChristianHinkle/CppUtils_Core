@@ -2,7 +2,7 @@
 
 # Set this variable for the person including us to use.
 set(FILES_CMAKE_RESULT
-  # List out all our source files, relative to our "Source" directory.
+  # List out all our source files, relative to our "Files" directory.
   "${MY_BASE_PROJECT_NAME_FULL}_Export.cpp"
   "Lifetime.cpp"
   "Concepts.cpp"
