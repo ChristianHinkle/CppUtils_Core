@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <CppUtils_Core/Concepts.h>
-#include <CppUtils_StdReimpl/Concepts.h>
+#include <CppUtils/Core/Concepts.h>
+#include <CppUtils/StdReimpl/Concepts.h>
 
 namespace CppUtils
 {
