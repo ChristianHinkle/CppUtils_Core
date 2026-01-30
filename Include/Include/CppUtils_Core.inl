@@ -7,16 +7,16 @@
 #include <limits>
 #include <cmath>
 
-template <CppUtils::Core::Concepts::NonLvalueReference T>
-constexpr T& CppUtils::Core::Materialize(T&& inTemporary)
+template <CppUtils::NonLvalueReference T>
+constexpr T& CppUtils::Materialize(T&& inTemporary)
 {
     // Note that the temporary gets promoted to an lvalue for the scope of this function. It
     // will revert to its original lifetime of temporary when this function is exited.
     return static_cast<T&>(inTemporary);
 }
 
-template <CppUtils::StdReimpl::Concepts::floating_point TFloat>
-TFloat CppUtils::Core::IeeeDivide(TFloat dividend, TFloat divisor)
+template <StdReimpl::floating_point TFloat>
+TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
 {
     // Note: We make sure that each return case is abiding by the NaNs-always-propagate rule.
 

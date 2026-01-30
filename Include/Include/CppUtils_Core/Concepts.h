@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <CppUtils_StdReimpl/Concepts.h>
 
-namespace CppUtils::Core::Concepts
+namespace CppUtils
 {
     template <class T>
     concept Pointer = std::is_pointer_v<T>;
@@ -28,8 +28,8 @@ namespace CppUtils::Core::Concepts
     concept NonLvalueReference = !LvalueReference<T>;
 
     template <class T, class TBase>
-    concept PointerToDerivedFrom = Pointer<T> && StdReimpl::Concepts::derived_from<std::remove_pointer_t<T>, TBase>;
+    concept PointerToDerivedFrom = Pointer<T> && StdReimpl::derived_from<std::remove_pointer_t<T>, TBase>;
 
     template <class T, class TBase>
-    concept ReferenceToDerivedFrom = Reference<T> && StdReimpl::Concepts::derived_from<std::remove_reference_t<T>, TBase>;
+    concept ReferenceToDerivedFrom = Reference<T> && StdReimpl::derived_from<std::remove_reference_t<T>, TBase>;
 }

@@ -9,7 +9,7 @@
 #include <span>
 #include <iterator>
 
-namespace CppUtils::Core
+namespace CppUtils
 {
     /**
      * @note Constructor and assignment rules mirror `std::basic_string_view`. See https://eel.is/c++draft/string.view.cons and https://en.cppreference.com/w/cpp/string/basic_string_view/basic_string_view.html.

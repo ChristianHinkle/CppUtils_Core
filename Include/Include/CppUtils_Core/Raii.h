@@ -6,12 +6,12 @@
 #include <utility>
 #include <type_traits>
 
-namespace CppUtils::Core
+namespace CppUtils
 {
     /**
      * @brief @Christian: TODO: [todo][tests] No tests are written for this utility, and it's not currently used anywhere.
      */
-    template <CppUtils::StdReimpl::Concepts::invocable TFunctor>
+    template <StdReimpl::invocable TFunctor>
     struct OnScopeExitStruct final
     {
         OnScopeExitStruct(const OnScopeExitStruct&) = delete;
@@ -45,7 +45,7 @@ namespace CppUtils::Core
     /**
      * @brief @Christian: TODO: [todo][tests] No tests are written for this utility, and it's not currently used anywhere.
      */
-    template <CppUtils::StdReimpl::Concepts::invocable TFunctor>
+    template <StdReimpl::invocable TFunctor>
     decltype(auto) OnScopeExit(TFunctor&& callback)
     {
         return OnScopeExitStruct<std::decay_t<TFunctor>>(std::forward<TFunctor>(callback));

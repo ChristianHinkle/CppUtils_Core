@@ -3,16 +3,16 @@
 #include <CppUtils_Core/Concepts.h>
 
 // Perform the basic sanity checks first.
-static_assert(CppUtils::Core::Concepts::NonLvalueReference<int>);
-static_assert(CppUtils::Core::Concepts::NonLvalueReference<int&&>);
-static_assert(!CppUtils::Core::Concepts::NonLvalueReference<int&>);
+static_assert(CppUtils::NonLvalueReference<int>);
+static_assert(CppUtils::NonLvalueReference<int&&>);
+static_assert(!CppUtils::NonLvalueReference<int&>);
 
 namespace
 {
     /**
      * @brief This example function only accepts rvalues.
      */
-    template <CppUtils::Core::Concepts::NonLvalueReference T>
+    template <CppUtils::NonLvalueReference T>
     constexpr void MyNonLvalueReferenceFunc(T&& arg)
     {
     }

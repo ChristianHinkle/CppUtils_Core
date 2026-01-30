@@ -13,21 +13,21 @@ int main(int argc, char** argv)
     // Basic sanity checks. Make sure the division behaves as expected for the simple cases.
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1.f, 1.f) != 1.f / 1.f)
+    if (CppUtils::IeeeDivide(1.f, 1.f) != 1.f / 1.f)
     {
         std::cout << "Subtest `" << testCode << "` failed." << std::endl;
         return testCode;
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1561.0, 18.0) != 1561.0 / 18.0)
+    if (CppUtils::IeeeDivide(1561.0, 18.0) != 1561.0 / 18.0)
     {
         std::cout << "Subtest `" << testCode << "` failed." << std::endl;
         return testCode;
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(.0000321l, .0123l) != .0000321l / .0123l)
+    if (CppUtils::IeeeDivide(.0000321l, .0123l) != .0000321l / .0123l)
     {
         std::cout << "Subtest `" << testCode << "` failed." << std::endl;
         return testCode;
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     // Now, test the edge cases.
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1.f, 0.f) != std::numeric_limits<float>::infinity())
+    if (CppUtils::IeeeDivide(1.f, 0.f) != std::numeric_limits<float>::infinity())
     {
         constexpr char caseText[] = "1 / 0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(-1.f, 0.f) != -std::numeric_limits<float>::infinity())
+    if (CppUtils::IeeeDivide(-1.f, 0.f) != -std::numeric_limits<float>::infinity())
     {
         constexpr char caseText[] = "-1 / 0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -52,7 +52,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1.f, -0.f) != -std::numeric_limits<float>::infinity())
+    if (CppUtils::IeeeDivide(1.f, -0.f) != -std::numeric_limits<float>::infinity())
     {
         constexpr char caseText[] = "1 / -0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(-1.f, -0.f) != std::numeric_limits<float>::infinity())
+    if (CppUtils::IeeeDivide(-1.f, -0.f) != std::numeric_limits<float>::infinity())
     {
         constexpr char caseText[] = "-1 / -0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(0.f, 0.f)))
+    if (!std::isnan(CppUtils::IeeeDivide(0.f, 0.f)))
     {
         constexpr char caseText[] = "0 / 0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(-0.f, 0.f)))
+    if (!std::isnan(CppUtils::IeeeDivide(-0.f, 0.f)))
     {
         constexpr char caseText[] = "-0 / 0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(0.f, -0.f)))
+    if (!std::isnan(CppUtils::IeeeDivide(0.f, -0.f)))
     {
         constexpr char caseText[] = "0 / -0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(-0.f, -0.f)))
+    if (!std::isnan(CppUtils::IeeeDivide(-0.f, -0.f)))
     {
         constexpr char caseText[] = "-0 / -0";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity())))
+    if (!std::isnan(CppUtils::IeeeDivide(std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity())))
     {
         constexpr char caseText[] = "inf / inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(-std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity())))
+    if (!std::isnan(CppUtils::IeeeDivide(-std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity())))
     {
         constexpr char caseText[] = "-inf / inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -116,7 +116,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity())))
+    if (!std::isnan(CppUtils::IeeeDivide(std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity())))
     {
         constexpr char caseText[] = "inf / -inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(-std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity())))
+    if (!std::isnan(CppUtils::IeeeDivide(-std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity())))
     {
         constexpr char caseText[] = "-inf / -inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -132,7 +132,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1.f, std::numeric_limits<float>::infinity()) != 0.f)
+    if (CppUtils::IeeeDivide(1.f, std::numeric_limits<float>::infinity()) != 0.f)
     {
         constexpr char caseText[] = "1 / inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(-1.f, std::numeric_limits<float>::infinity()) != -0.f)
+    if (CppUtils::IeeeDivide(-1.f, std::numeric_limits<float>::infinity()) != -0.f)
     {
         constexpr char caseText[] = "-1 / inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -148,7 +148,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(1.f, -std::numeric_limits<float>::infinity()) != -0.f)
+    if (CppUtils::IeeeDivide(1.f, -std::numeric_limits<float>::infinity()) != -0.f)
     {
         constexpr char caseText[] = "1 / -inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -156,7 +156,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (CppUtils::Core::IeeeDivide(-1.f, -std::numeric_limits<float>::infinity()) != 0.f)
+    if (CppUtils::IeeeDivide(-1.f, -std::numeric_limits<float>::infinity()) != 0.f)
     {
         constexpr char caseText[] = "-1 / -inf";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -164,7 +164,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(std::numeric_limits<float>::quiet_NaN(), 1.f)))
+    if (!std::isnan(CppUtils::IeeeDivide(std::numeric_limits<float>::quiet_NaN(), 1.f)))
     {
         constexpr char caseText[] = "NaN / 1";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -172,7 +172,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(1.f, std::numeric_limits<float>::quiet_NaN())))
+    if (!std::isnan(CppUtils::IeeeDivide(1.f, std::numeric_limits<float>::quiet_NaN())))
     {
         constexpr char caseText[] = "1 / NaN";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -180,7 +180,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(std::numeric_limits<float>::quiet_NaN(), std::numeric_limits<float>::quiet_NaN())))
+    if (!std::isnan(CppUtils::IeeeDivide(std::numeric_limits<float>::quiet_NaN(), std::numeric_limits<float>::quiet_NaN())))
     {
         constexpr char caseText[] = "NaN / NaN";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
@@ -188,7 +188,7 @@ int main(int argc, char** argv)
     }
 
     ++testCode;
-    if (!std::isnan(CppUtils::Core::IeeeDivide(-std::numeric_limits<float>::quiet_NaN(), -std::numeric_limits<float>::quiet_NaN())))
+    if (!std::isnan(CppUtils::IeeeDivide(-std::numeric_limits<float>::quiet_NaN(), -std::numeric_limits<float>::quiet_NaN())))
     {
         constexpr char caseText[] = "-NaN / -NaN";
         std::cout << "Subtest `" << testCode << "` failed. Case: `"<< caseText << "`." << std::endl;
