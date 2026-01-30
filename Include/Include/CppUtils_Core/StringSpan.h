@@ -19,8 +19,8 @@ namespace CppUtils::Core
     {
     public:
 
-        using traits_type = TTraits;
-        using value_type = TChar;
+        using SpanType = std::span<TChar>;
+        using StringViewType = std::basic_string_view<TChar, TTraits>;
 
     public:
 
@@ -46,19 +46,19 @@ namespace CppUtils::Core
 
     public:
 
-        std::span<TChar>& GetSpan()
+        SpanType& GetSpan()
         {
             return CharSpan;
         }
 
-        std::basic_string_view<TChar, TTraits> ToStringView() const
+        StringViewType ToStringView() const
         {
             return {CharSpan.data(), CharSpan.size()};
         }
 
     private:
 
-        std::span<TChar> CharSpan;
+        SpanType CharSpan;
     };
 
     /**
