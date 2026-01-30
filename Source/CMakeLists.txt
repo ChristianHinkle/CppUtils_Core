@@ -98,8 +98,9 @@ block(SCOPE_FOR VARIABLES)
   # List of all source files (relative to our "Source" directory).
   set(MyTargetSources
     "${MY_BASE_PROJECT_NAME_FULL}_Export.cpp"
-    "CppUtils_Core.cpp"
+    "Lifetime.cpp"
     "Concepts.cpp"
+    "Math.cpp"
     "Raii.cpp"
     "StringSpan.cpp"
     )

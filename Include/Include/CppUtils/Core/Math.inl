@@ -2,18 +2,10 @@
 
 #pragma once
 
-#include <CppUtils_Core.h>
+#include <CppUtils/Core/Math.h>
 
 #include <limits>
 #include <cmath>
-
-template <CppUtils::NonLvalueReference T>
-constexpr T& CppUtils::Materialize(T&& inTemporary)
-{
-    // Note that the temporary gets promoted to an lvalue for the scope of this function. It
-    // will revert to its original lifetime of temporary when this function is exited.
-    return static_cast<T&>(inTemporary);
-}
 
 template <StdReimpl::floating_point TFloat>
 TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
