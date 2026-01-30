@@ -12,6 +12,7 @@ SET(MY_BASE_PROJECT_NAME_LEAFNAME "Core")
 include(CMakeFindDependencyMacro)
 
 find_dependency(CppUtils_StdReimpl CONFIG COMPONENTS Include)
+find_dependency(CppUtils_StdReimpl CONFIG COMPONENTS Static)
 
 # Include our export. This imports all of our targets.
 include("${CMAKE_CURRENT_LIST_DIR}/${MY_BASE_PROJECT_NAME_FULL}Export.cmake")
