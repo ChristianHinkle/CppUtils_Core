@@ -8,13 +8,14 @@
 #include <string>
 #include <span>
 #include <iterator>
+#include <CppUtils/Core/Concepts.h>
 
 namespace CppUtils
 {
     /**
      * @note Constructor and assignment rules mirror `std::basic_string_view`. See https://eel.is/c++draft/string.view.cons and https://en.cppreference.com/w/cpp/string/basic_string_view/basic_string_view.html.
      */
-    template <class TChar, class TTraits = std::char_traits<TChar>>
+    template <CppUtils::CharLike TChar, class TTraits = std::char_traits<TChar>>
     struct StringSpan
     {
     public:
