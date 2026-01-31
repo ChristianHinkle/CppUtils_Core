@@ -32,4 +32,20 @@ namespace CppUtils
 
     template <class T, class TBase>
     concept ReferenceToDerivedFrom = Reference<T> && StdReimpl::derived_from<std::remove_reference_t<T>, TBase>;
+
+    /**
+     * @brief A concept implementing the standard's definition of what "char-like types" are. Currently based on
+     *        the C++26 standard.
+     * @see https://eel.is/c++draft/strings#general-1
+     * @see https://cppreference.com/w/cpp/string.html#Characters
+     * @see https://cppevo.dev/diffs/cpp23-to-trunk/strings.general
+     */
+    template <class T>
+    concept CharLike =
+        // "non-array trivially copyable standard-layout type T"
+        !std::is_array_v<T>
+        && std::is_trivially_copyable_v<T>
+        && std::is_standard_layout_v<T>
+        // "where is_trivially_default_constructible_v<T> is true"
+        && std::is_trivially_default_constructible_v<T>;
 }
