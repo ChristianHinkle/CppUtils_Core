@@ -22,29 +22,29 @@ project(${MY_BASE_PROJECT_NAME_FULL}_Tests
 # even need to exist yet because CMake only validates the existence of targets at the end of the entire
 # configuration process.
 
-add_executable(IeeeDivide)
-target_compile_features(IeeeDivide PUBLIC cxx_std_20)
-target_sources(IeeeDivide PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/IeeeDivide.cpp")
-target_link_libraries(IeeeDivide
+add_executable(${MY_BASE_PROJECT_NAME_FULL}_IeeeDivide)
+target_compile_features(${MY_BASE_PROJECT_NAME_FULL}_IeeeDivide PUBLIC cxx_std_20)
+target_sources(${MY_BASE_PROJECT_NAME_FULL}_IeeeDivide PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/IeeeDivide.cpp")
+target_link_libraries(${MY_BASE_PROJECT_NAME_FULL}_IeeeDivide
   PRIVATE
     ${MY_BASE_PROJECT_NAME_NAMESPACE}::${MY_BASE_PROJECT_NAME_LEAFNAME}::Static
   )
 
-add_test(NAME CppUtils.Core.IeeeDivide
-  COMMAND IeeeDivide
+add_test(NAME ${MY_BASE_PROJECT_NAME_NAMESPACE}.${MY_BASE_PROJECT_NAME_LEAFNAME}.IeeeDivide
+  COMMAND ${MY_BASE_PROJECT_NAME_FULL}_IeeeDivide
   )
 
-add_library(NonLvalueReference STATIC EXCLUDE_FROM_ALL)
-target_compile_features(NonLvalueReference PUBLIC cxx_std_20)
-target_sources(NonLvalueReference PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/NonLvalueReference.cpp")
-target_link_libraries(NonLvalueReference
+add_library(${MY_BASE_PROJECT_NAME_FULL}_NonLvalueReference STATIC EXCLUDE_FROM_ALL)
+target_compile_features(${MY_BASE_PROJECT_NAME_FULL}_NonLvalueReference PUBLIC cxx_std_20)
+target_sources(${MY_BASE_PROJECT_NAME_FULL}_NonLvalueReference PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/NonLvalueReference.cpp")
+target_link_libraries(${MY_BASE_PROJECT_NAME_FULL}_NonLvalueReference
   PRIVATE
     ${MY_BASE_PROJECT_NAME_NAMESPACE}::${MY_BASE_PROJECT_NAME_LEAFNAME}::Include
   )
 
 add_test(
-  NAME CppUtils.Core.NonLvalueReference
+  NAME ${MY_BASE_PROJECT_NAME_NAMESPACE}.${MY_BASE_PROJECT_NAME_LEAFNAME}.NonLvalueReference
   COMMAND ${CMAKE_COMMAND}
     --build ${CMAKE_CURRENT_BINARY_DIR}
-    --target NonLvalueReference
+    --target ${MY_BASE_PROJECT_NAME_FULL}_NonLvalueReference
   )
