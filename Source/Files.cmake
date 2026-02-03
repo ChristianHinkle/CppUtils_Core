@@ -9,5 +9,4 @@ set(FILES_CMAKE_RESULT
   "Math.cpp"
   "Raii.cpp"
   "StringSpan.cpp"
-  "TypeTraits.cpp"
   )
