@@ -69,4 +69,9 @@ namespace CppUtils
      */
     template <class _Iter, class _Sent>
     StringSpan(_Iter, _Sent) -> StringSpan<std::iter_value_t<_Iter>>;
+
+    template <class T>
+    consteval bool IsStringSpan();
 }
+
+#include <CppUtils/Core/StringSpan.inl>
