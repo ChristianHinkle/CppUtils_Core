@@ -21,7 +21,7 @@ namespace CppUtils
     public:
 
         using SpanType = std::span<TChar>;
-        using StringViewType = std::basic_string_view<TChar, TTraits>;
+        using StringViewType = std::basic_string_view<std::remove_const_t<TChar>, TTraits>;
 
     public:
 
@@ -48,6 +48,11 @@ namespace CppUtils
     public:
 
         SpanType& GetSpan()
+        {
+            return CharSpan;
+        }
+
+        const SpanType& GetSpan() const
         {
             return CharSpan;
         }
