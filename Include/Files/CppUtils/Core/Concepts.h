@@ -48,4 +48,7 @@ namespace CppUtils
         && std::is_standard_layout_v<T>
         // "where is_trivially_default_constructible_v<T> is true"
         && std::is_trivially_default_constructible_v<T>;
+
+    template <class T>
+    concept Enum = std::is_enum_v<T>;
 }
