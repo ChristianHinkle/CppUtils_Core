@@ -17,15 +17,18 @@ namespace CppUtils
     template <StdReimpl::floating_point TFloat>
     TFloat IeeeDivide(TFloat dividend, TFloat divisor);
 
+    template <StdReimpl::signed_integral TInteger>
+    constexpr unsigned int CountNumDigits(TInteger number, unsigned int base);
+
+    template <StdReimpl::unsigned_integral TInteger>
+    constexpr unsigned int CountNumDigits(TInteger number, unsigned int base);
+
     namespace NumberSystemBases
     {
         constexpr unsigned int Decimal = 10u;
         constexpr unsigned int Hexadecimal = 16u;
         constexpr unsigned int Binary = 2u;
     }
-
-    template <StdReimpl::integral TInteger>
-    constexpr unsigned int CountNumDigits(TInteger number, unsigned int base);
 
     template <StdReimpl::integral TInteger>
     constexpr unsigned int CountNumDigitsDec(TInteger number)

@@ -7,6 +7,7 @@
 #include <limits>
 #include <cmath>
 #include <CppUtils/StdReimpl/cstdlib.h>
+#include <type_traits>
 
 template <StdReimpl::floating_point TFloat>
 TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
@@ -63,23 +64,22 @@ TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
     return dividend / divisor;
 }
 
-template <StdReimpl::integral TInteger>
+template <StdReimpl::signed_integral TInteger>
+constexpr unsigned int CppUtils::CountNumDigits(TInteger number, unsigned int base)
+{
+    return CountNumDigits(
+        static_cast<std::make_unsigned_t<TInteger>>(StdReimpl::abs(number)),
+        base);
+}
+
+template <StdReimpl::unsigned_integral TInteger>
 constexpr unsigned int CppUtils::CountNumDigits(TInteger number, unsigned int base)
 {
     unsigned int count = 0u;
 
+    for (TInteger testNum = number; testNum > 0; testNum /= base)
     {
-        TInteger testNum = number;
-
-        if constexpr (std::is_signed_v<TInteger>)
-        {
-            testNum = StdReimpl::abs(testNum);
-        }
-
-        for (; testNum > 0; testNum /= base)
-        {
-            ++count;
-        }
+        ++count;
     }
 
     return count;
