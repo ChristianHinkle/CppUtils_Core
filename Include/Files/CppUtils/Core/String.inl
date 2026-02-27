@@ -3,10 +3,9 @@
 #pragma once
 
 #include <CppUtils/Core/String.h>
-#include <CppUtils/Core/String.inl>
 
 #include <locale>
-#include <CppUtils/StdReimpl/cstdlib.h>
+#include <CppUtils/Core/Math.h>
 
 template <CppUtils::CharLike TChar, class TTraits>
 bool CppUtils::HasLeadingWhitespace(std::basic_string_view<TChar, TTraits> sourceString)
@@ -100,28 +99,6 @@ template <CppUtils::CharLike TChar, class TTraits, class TAllocator>
 std::basic_string_view<TChar, TTraits> CppUtils::MakeStringView(const std::basic_string<TChar, TTraits, TAllocator>& fromString)
 {
     return std::basic_string_view<TChar, TTraits>(fromString);
-}
-
-template <StdReimpl::integral TInteger>
-constexpr std::size_t CppUtils::CountNumDigits(TInteger number, unsigned int base)
-{
-    std::size_t count = 0u;
-
-    {
-        TInteger testNum = number;
-
-        if constexpr (std::is_signed_v<TInteger>)
-        {
-            testNum = StdReimpl::abs(testNum);
-        }
-
-        for (; testNum > 0; testNum /= base)
-        {
-            ++count;
-        }
-    }
-
-    return count;
 }
 
 template <StdReimpl::integral TInteger>

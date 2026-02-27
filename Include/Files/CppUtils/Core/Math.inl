@@ -6,6 +6,7 @@
 
 #include <limits>
 #include <cmath>
+#include <CppUtils/StdReimpl/cstdlib.h>
 
 template <StdReimpl::floating_point TFloat>
 TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
@@ -60,4 +61,26 @@ TFloat CppUtils::IeeeDivide(TFloat dividend, TFloat divisor)
 
     // Note: The potential NaN values from our parameters will naturally propagate in this case, so we are NaNs-always-propagate rule compliant.
     return dividend / divisor;
+}
+
+template <StdReimpl::integral TInteger>
+constexpr unsigned int CppUtils::CountNumDigits(TInteger number, unsigned int base)
+{
+    unsigned int count = 0u;
+
+    {
+        TInteger testNum = number;
+
+        if constexpr (std::is_signed_v<TInteger>)
+        {
+            testNum = StdReimpl::abs(testNum);
+        }
+
+        for (; testNum > 0; testNum /= base)
+        {
+            ++count;
+        }
+    }
+
+    return count;
 }
