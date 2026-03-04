@@ -10,4 +10,5 @@ set(FILES_CMAKE_RESULT
   "Raii.cpp"
   "StringSpan.cpp"
   "String.cpp"
+  "Algorithm.cpp"
   )
