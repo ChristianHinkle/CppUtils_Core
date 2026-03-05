@@ -58,6 +58,27 @@ namespace CppUtils
 
     template <class InputIt, class UnaryPred>
     constexpr std::ptrdiff_t distance_find_if_not(InputIt first, InputIt last, UnaryPred q);
+
+    /**
+     * @brief Uses the `find` algorithms to determine whether the value exists.
+     */
+    template <class R, class T>
+    constexpr bool contains(R&& r, const T& value);
+
+    template <class R, class Pred>
+    constexpr bool contains_if(R&& r, Pred pred);
+
+    template <class R, class Pred>
+    constexpr bool contains_if_not(R&& r, Pred pred);
+
+    template <class InputIt, class T>
+    constexpr bool contains(InputIt first, InputIt last, const T& value);
+
+    template <class InputIt, class UnaryPred>
+    constexpr bool contains_if(InputIt first, InputIt last, UnaryPred p);
+
+    template <class InputIt, class UnaryPred>
+    constexpr bool contains_if_not(InputIt first, InputIt last, UnaryPred q);
 }
 
 #include <CppUtils/Core/Algorithm.inl>

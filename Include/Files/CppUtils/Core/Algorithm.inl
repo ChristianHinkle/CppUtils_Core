@@ -130,3 +130,51 @@ constexpr std::ptrdiff_t CppUtils::distance_find_if_not(InputIt first, InputIt l
         std::find_if_not(first, last, std::move(q))
     );
 }
+
+template <class R, class T>
+constexpr bool CppUtils::contains(R&& r, const T& value)
+{
+    return contains(
+        std::ranges::begin(r),
+        std::ranges::end(r),
+        value
+    );
+}
+
+template <class R, class Pred>
+constexpr bool CppUtils::contains_if(R&& r, Pred pred)
+{
+    return contains_if(
+        std::ranges::begin(r),
+        std::ranges::end(r),
+        std::move(pred)
+    );
+}
+
+template <class R, class Pred>
+constexpr bool CppUtils::contains_if_not(R&& r, Pred pred)
+{
+    return contains_if_not(
+        std::ranges::begin(r),
+        std::ranges::end(r),
+        std::move(pred)
+    );
+}
+
+template <class InputIt, class T>
+constexpr bool CppUtils::contains(InputIt first, InputIt last, const T& value)
+{
+    return std::find(first, last, value) != last;
+}
+
+template <class InputIt, class UnaryPred>
+constexpr bool CppUtils::contains_if(InputIt first, InputIt last, UnaryPred p)
+{
+    return std::find_if(first, last, std::move(p)) != last;
+}
+
+template <class InputIt, class UnaryPred>
+constexpr bool CppUtils::contains_if_not(InputIt first, InputIt last, UnaryPred q)
+{
+    return std::find_if_not(first, last, std::move(q)) != last;
+}
