@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <ranges>
 
 namespace CppUtils
 {
@@ -13,12 +14,21 @@ namespace CppUtils
      */
     constexpr std::size_t npos = static_cast<std::size_t>(-1);
 
-    // @Christian: TODO: [todo][std][concepts] Add constraints to the iterater type template parameters. We'd have to
-    // reimplement the iterator concepts in StdReimpl to do this.
+    // @Christian: TODO: [todo][std][concepts] Add constraints to the iterater and range type template parameters. We'd have to
+    // reimplement the concepts in StdReimpl to do this.
 
     /**
      * @brief Uses the `find` algorithms along with `distance` to return the index of the found value. Returns npos if not found.
      */
+    template <class R, class T>
+    constexpr std::size_t index_find(R&& r, const T& value);
+
+    template <class R, class Pred>
+    constexpr std::size_t index_find_if(R&& r, Pred pred);
+
+    template <class R, class Pred>
+    constexpr std::size_t index_find_if_not(R&& r, Pred pred);
+
     template <class InputIt, class T>
     constexpr std::size_t index_find(InputIt first, InputIt last, const T& value);
 
@@ -31,6 +41,15 @@ namespace CppUtils
     /**
      * @brief Uses the `find` algorithms along with `distance` to return the distance to the found value.
      */
+    template <class R, class T>
+    constexpr std::ptrdiff_t distance_find(R&& r, const T& value);
+
+    template <class R, class Pred>
+    constexpr std::ptrdiff_t distance_find_if(R&& r, Pred pred);
+
+    template <class R, class Pred>
+    constexpr std::ptrdiff_t distance_find_if_not(R&& r, Pred pred);
+
     template <class InputIt, class T>
     constexpr std::ptrdiff_t distance_find(InputIt first, InputIt last, const T& value);
 
