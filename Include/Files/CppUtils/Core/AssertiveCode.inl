@@ -14,6 +14,10 @@
 template <CppUtils::Dereferenceable T>
 constexpr decltype(auto) CppUtils::DerefAsserted(T&& param)
 {
+    static_assert(
+        requires(std::remove_reference_t<T> t) { static_cast<bool>(t); },
+        "The parameter's type must be explicitly convertible to a bool! That's how we test for validity.");
+
     CPPUTILS_ASSERT(static_cast<bool>(param), "Expected to be valid before dereferencing!");
     return *std::forward<T>(param);
 }
