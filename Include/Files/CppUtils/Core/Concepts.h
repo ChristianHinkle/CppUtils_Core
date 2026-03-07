@@ -51,4 +51,10 @@ namespace CppUtils
 
     template <class T>
     concept Enum = std::is_enum_v<T>;
+
+    /**
+     * @brief A concept satisfied if variables of the type are able to be dereferenced.
+     */
+    template <class T>
+    concept Dereferenceable = requires(T t) { *t; };
 }

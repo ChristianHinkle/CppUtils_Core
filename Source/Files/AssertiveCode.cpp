@@ -1,0 +1,4 @@
+// Copyright (c) 2023-2025 Christian Hinkle, Brian Hinkle.
+
+#include <CppUtils/Core/AssertiveCode.h>
+#include <CppUtils/Core/AssertiveCode.inl>

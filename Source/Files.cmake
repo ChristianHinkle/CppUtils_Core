@@ -11,4 +11,5 @@ set(FILES_CMAKE_RESULT
   "StringSpan.cpp"
   "String.cpp"
   "Algorithm.cpp"
+  "AssertiveCode.cpp"
   )
