@@ -13,4 +13,5 @@ set(FILES_CMAKE_RESULT
   "String.cpp"
   "Algorithm.cpp"
   "AssertiveCode.cpp"
+  "ExpectedResult.cpp"
   )
