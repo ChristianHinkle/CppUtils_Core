@@ -11,6 +11,7 @@ set(FILES_CMAKE_RESULT
   "Raii.cpp"
   "StringSpan.cpp"
   "String.cpp"
+  "Filesystem.cpp"
   "Algorithm.cpp"
   "AssertiveCode.cpp"
   "ExpectedResult.cpp"
