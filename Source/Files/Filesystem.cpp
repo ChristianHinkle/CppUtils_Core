@@ -9,3 +9,8 @@ CppUtils::StdPathStringView CppUtils::GetStringViewFromPath(const std::filesyste
 {
     return StdPathStringView(path.native().c_str(), path.native().length());
 }
+
+bool CppUtils::TouchNewFile(const StdPathStringView path)
+{
+    return TouchNewFile<>(path);
+}
