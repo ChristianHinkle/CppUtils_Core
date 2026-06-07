@@ -3,7 +3,8 @@
 #pragma once
 
 #include <CppUtils_Core_Export.h>
-#include <optional>
+#include <variant>
+#include <utility>
 
 namespace CppUtils
 {
@@ -14,43 +15,58 @@ namespace CppUtils
     struct ExpectedResult
     {
     public:
+        ExpectedResult(const T& value)
+            : ValueOrErrorVariant{value}
+        {
+        }
         ExpectedResult(T&& value)
-            : Value{value}
+            : ValueOrErrorVariant{std::move(value)}
         {
         }
         ExpectedResult(const TError& error)
-            : Error{error}
+            : ValueOrErrorVariant{error}
+        {
+        }
+        ExpectedResult(TError&& error)
+            : ValueOrErrorVariant{std::move(error)}
         {
         }
 
     public:
         bool IsError() const
         {
-            return !Value.has_value();
+            return ValueOrErrorVariant.index() != 0u;
         }
 
-        const TError& GetError() const
+        const TError& GetError() const &
         {
             assert(IsError());
-            return Error;
+            return std::get<TError>(ValueOrErrorVariant);
+        }
+        TError&& GetError() &&
+        {
+            TError& result = const_cast<TError&>(
+                const_cast<const ExpectedResult&>(*this).GetError()
+            );
+
+            return std::move(result);
         }
 
         const T& GetValue() const &
         {
             assert(!IsError());
-
-            assert(Value.has_value());
-            return *Value;
+            return std::get<T>(ValueOrErrorVariant);
         }
-
         T&& GetValue() &&
         {
-            T& value = const_cast<T&>(GetValue());
-            return std::move(value);
+            T& result = const_cast<T&>(
+                const_cast<const ExpectedResult&>(*this).GetValue()
+            );
+
+            return std::move(result);
         }
 
     private:
-        std::optional<T> Value{std::nullopt};
-        TError Error{};
+        std::variant<T, TError> ValueOrErrorVariant;
     };
 }
