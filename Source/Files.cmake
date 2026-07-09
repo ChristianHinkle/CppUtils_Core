@@ -15,4 +15,5 @@ set(FILES_CMAKE_RESULT
   "Algorithm.cpp"
   "AssertiveCode.cpp"
   "ExpectedResult.cpp"
+  "OverloadedCallable.cpp"
   )
