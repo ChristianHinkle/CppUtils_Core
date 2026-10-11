@@ -8,13 +8,13 @@
 #include <fstream>
 
 template <class TFwdIt, CppUtils::CharLike TChar>
-void CppUtils::ConvertPathStringToPrettyFormat(TFwdIt begin, TFwdIt end)
+void CppUtils::ConvertPathStringToGenericFormat(TFwdIt begin, TFwdIt end)
 {
     std::replace(
         begin,
         end,
         static_cast<TChar>(std::filesystem::path::preferred_separator),
-        static_cast<TChar>(PrettyPathSeparator<TChar>));
+        static_cast<TChar>(GenericPathSeparator<TChar>));
 }
 
 template <CppUtils::CharLike TChar, class TCharTraits>

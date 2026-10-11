@@ -9,9 +9,9 @@
 #include <CppUtils/Core/Concepts.h>
 
 /**
- * @brief String literal alternative to `CppUtils::PrettyPathSeparator`.
+ * @brief String literal alternative to `CppUtils::GenericPathSeparator`.
  */
-#define CPPUTILS_PRETTY_PATH_SEPARATOR '/'
+#define CPPUTILS_GENERIC_PATH_SEPARATOR '/'
 
 /**
  * @brief Filesystem utilities to extend the default std::filesystem tools.
@@ -25,12 +25,12 @@ namespace CppUtils
      * @brief A character that represents the most widely-accepted path separator across all platforms.
      */
     template <CppUtils::CharLike TChar = FilesystemCharType>
-    constexpr TChar PrettyPathSeparator = CPPUTILS_PRETTY_PATH_SEPARATOR;
+    constexpr TChar GenericPathSeparator = CPPUTILS_GENERIC_PATH_SEPARATOR;
 
     CPPUTILS_CORE_EXPORT StdPathStringView GetStringViewFromPath(const std::filesystem::path& path);
 
     template <class TFwdIt, CppUtils::CharLike TChar = char>
-    void ConvertPathStringToPrettyFormat(TFwdIt begin, TFwdIt end);
+    void ConvertPathStringToGenericFormat(TFwdIt begin, TFwdIt end);
 
     /**
      * @brief Create an empty file.
