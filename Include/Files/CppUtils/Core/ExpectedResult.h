@@ -4,7 +4,9 @@
 
 #include <CppUtils_Core_Export.h>
 #include <variant>
+#include <optional>
 #include <utility>
+#include <cassert>
 
 namespace CppUtils
 {
@@ -68,5 +70,49 @@ namespace CppUtils
 
     private:
         std::variant<T, TError> ValueOrErrorVariant;
+    };
+
+    /**
+     * @brief Partial specialization for `void` result types.
+     */
+    template <class TError>
+    struct ExpectedResult<void, TError>
+    {
+    public:
+        ExpectedResult()
+            : ErrorOptional{}
+        {
+        }
+        ExpectedResult(const TError& error)
+            : ErrorOptional{error}
+        {
+        }
+        ExpectedResult(TError&& error)
+            : ErrorOptional{std::move(error)}
+        {
+        }
+
+    public:
+        bool IsError() const
+        {
+            return ErrorOptional.has_value();
+        }
+
+        const TError& GetError() const &
+        {
+            assert(IsError());
+            return *ErrorOptional;
+        }
+        TError&& GetError() &&
+        {
+            TError& result = const_cast<TError&>(
+                const_cast<const ExpectedResult&>(*this).GetError()
+            );
+
+            return std::move(result);
+        }
+
+    private:
+        std::optional<TError> ErrorOptional;
     };
 }
