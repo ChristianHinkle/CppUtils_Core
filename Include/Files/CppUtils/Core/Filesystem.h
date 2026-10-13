@@ -7,6 +7,7 @@
 #include <string_view>
 #include <string>
 #include <CppUtils/Core/Concepts.h>
+#include <CppUtils/Core/ExpectedResult.h>
 
 /**
  * @brief String literal alternative to `CppUtils::GenericPathSeparator`.
@@ -20,6 +21,89 @@ namespace CppUtils
 {
     using FilesystemCharType = std::filesystem::path::value_type;
     using StdPathStringView = std::basic_string_view<FilesystemCharType>;
+
+    enum class ErrorCode_MakeAbsolute
+    {
+        PathNotRelative,
+        RelativePathHasRootName,
+        RelativePathHasRootDirectory,
+    };
+
+    enum class ErrorCode_MakeAbsoluteWithEc
+    {
+        PathNotRelative,
+        RelativePathHasRootName,
+        RelativePathHasRootDirectory,
+        StdErrorCode,
+    };
+
+    /**
+     * @brief Makes an absolute path from a relative path, erroring if the given path is not valid for this operation.
+     *
+     * Required invariants:
+     * - p.is_relative()
+     * - !p.has_root_name()
+     * - !p.has_root_directory()
+     */
+    CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<std::filesystem::path, ErrorCode_MakeAbsolute> MakeAbsolute(
+        const std::filesystem::path& p);
+
+    /**
+     * @brief Overload of `MakeAbsolute` which uses std error code.
+     */
+    CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<std::filesystem::path, ErrorCode_MakeAbsoluteWithEc> MakeAbsolute(
+        const std::filesystem::path& p,
+        std::error_code& ec);
+
+    enum class ErrorCode_MakeAbsoluteUsingBase
+    {
+        PathNotRelative,
+        RelativePathHasRootName,
+        RelativePathHasRootDirectory,
+        BaseIsNotAbsolute,
+    };
+
+    /**
+     * @brief Given a relative path and a base absolute path, return a combined absolute path.
+     *
+     * Required invariants:
+     * - p.is_relative()
+     * - !p.has_root_name()
+     * - !p.has_root_directory()
+     * - base.is_absolute()
+     */
+    CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<std::filesystem::path, ErrorCode_MakeAbsoluteUsingBase> MakeAbsoluteUsingBase(
+        const std::filesystem::path& p,
+        const std::filesystem::path& base);
+
+    enum class ErrorCode_ValidateRelativePathCanBeMadeAbsolute
+    {
+        PathNotRelative,
+        RelativePathHasRootName,
+        RelativePathHasRootDirectory,
+    };
+
+    /**
+     * @brief Test whether a path can successfully be made absolute.
+     */
+    CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<void, ErrorCode_ValidateRelativePathCanBeMadeAbsolute> ValidateRelativePathCanBeMadeAbsolute(
+        const std::filesystem::path& p);
+
+    /**
+     * @brief Mirrors the overall logic of Boost.Filesystem's `boost::filesystem::absolute` function, according to their
+     *        documentation: https://boost.org/doc/libs/latest/libs/filesystem/doc/reference.html#absolute.
+     */
+    CPPUTILS_CORE_EXPORT std::filesystem::path MakeAbsoluteUsingBase_BoostLogic(
+        const std::filesystem::path& p,
+        const std::filesystem::path& base);
+
+    /**
+     * @brief Overload of `MakeAbsoluteUsingBase_BoostLogic` which uses std error code.
+     */
+    CPPUTILS_CORE_EXPORT std::filesystem::path MakeAbsoluteUsingBase_BoostLogic(
+        const std::filesystem::path& p,
+        const std::filesystem::path& base,
+        std::error_code& ec);
 
     /**
      * @brief A character that represents the most widely-accepted path separator across all platforms.
