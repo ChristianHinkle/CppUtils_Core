@@ -112,6 +112,20 @@ namespace CppUtils
     CPPUTILS_CORE_EXPORT bool IsRootPath(const std::filesystem::path& p);
 
     /**
+     * @brief Remove the trailing separator, if present.
+     * @note Root paths are left unchanged.
+     */
+    CPPUTILS_CORE_EXPORT std::filesystem::path StripTrailingSeparator(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path StripTrailingSeparator(std::filesystem::path&& p);
+
+    /**
+     * @brief Add the trailing separator, if not already present.
+     * @note Root paths and empty paths are left unchanged.
+     */
+    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSeparator(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSeparator(std::filesystem::path&& p);
+
+    /**
      * @brief A character that represents the most widely-accepted path separator across all platforms.
      */
     template <CppUtils::CharLike TChar = FilesystemCharType>

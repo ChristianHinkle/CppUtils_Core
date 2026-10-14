@@ -159,6 +159,36 @@ bool CppUtils::IsRootPath(const std::filesystem::path& p)
     return isRootPath;
 }
 
+std::filesystem::path CppUtils::StripTrailingSeparator(const std::filesystem::path& p)
+{
+    return StripTrailingSeparator(std::filesystem::path{p});
+}
+std::filesystem::path CppUtils::StripTrailingSeparator(std::filesystem::path&& p)
+{
+    if (p.has_relative_path() && !p.has_filename())
+    {
+        // TODO: [todo] We should make a version of `parent_path` that supports in-place modification and move semantics. Because
+        // right now this move isn't doing anything since they don't have an rvalue overload.
+        return std::move(p).parent_path();
+    }
+
+    return p;
+}
+
+std::filesystem::path CppUtils::WithTrailingSeparator(const std::filesystem::path& p)
+{
+    return WithTrailingSeparator(std::filesystem::path{p});
+}
+std::filesystem::path CppUtils::WithTrailingSeparator(std::filesystem::path&& p)
+{
+    if (p.has_relative_path() && p.has_filename())
+    {
+        return std::move(p.operator/=(std::filesystem::path{}));
+    }
+
+    return p;
+}
+
 CppUtils::StdPathStringView CppUtils::GetStringViewFromPath(const std::filesystem::path& path)
 {
     return StdPathStringView(path.native().c_str(), path.native().length());
