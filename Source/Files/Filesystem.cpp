@@ -20,21 +20,9 @@ namespace
 CppUtils::ExpectedResult<std::filesystem::path, CppUtils::ErrorCode_MakeAbsolute> CppUtils::MakeAbsolute(
     const std::filesystem::path& p)
 {
-    CppUtils::ExpectedResult relativePathValidation = ValidateRelativePathCanBeMadeAbsolute(p);
-    if (relativePathValidation.IsError())
+    if (p.is_relative() && p.has_root_name())
     {
-        switch (relativePathValidation.GetError())
-        {
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::PathNotRelative:
-            return CppUtils::ErrorCode_MakeAbsolute::PathNotRelative;
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootName:
-            return CppUtils::ErrorCode_MakeAbsolute::RelativePathHasRootName;
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootDirectory:
-            return CppUtils::ErrorCode_MakeAbsolute::RelativePathHasRootDirectory;
-        }
-
-        assert(false); // Unhandled enum case!
-        std::abort();
+        return ErrorCode_MakeAbsolute::RelativePathHasRootName;
     }
 
     return std::filesystem::absolute(p);
@@ -46,21 +34,9 @@ CppUtils::ExpectedResult<std::filesystem::path, CppUtils::ErrorCode_MakeAbsolute
 {
     ec.clear();
 
-    CppUtils::ExpectedResult relativePathValidation = ValidateRelativePathCanBeMadeAbsolute(p);
-    if (relativePathValidation.IsError())
+    if (p.is_relative() && p.has_root_name())
     {
-        switch (relativePathValidation.GetError())
-        {
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::PathNotRelative:
-            return CppUtils::ErrorCode_MakeAbsoluteWithEc::PathNotRelative;
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootName:
-            return CppUtils::ErrorCode_MakeAbsoluteWithEc::RelativePathHasRootName;
-        case CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootDirectory:
-            return CppUtils::ErrorCode_MakeAbsoluteWithEc::RelativePathHasRootDirectory;
-        }
-
-        assert(false); // Unhandled enum case!
-        std::abort();
+        return ErrorCode_MakeAbsoluteWithEc::RelativePathHasRootName;
     }
 
     auto result = std::filesystem::absolute(p, ec);
@@ -77,21 +53,23 @@ CppUtils::ExpectedResult<std::filesystem::path, CppUtils::ErrorCode_MakeAbsolute
     const std::filesystem::path& p,
     const std::filesystem::path& base)
 {
-    CppUtils::ExpectedResult relativePathValidation = ValidateRelativePathCanBeMadeAbsolute(p);
-    if (relativePathValidation.IsError())
+    // Note: This check is a bit redundant considering the additional checks that follow it since, on the
+    // usual operating systems (POSIX-based and Windows), `!p.has_root_name() && !p.has_root_directory()` already
+    // implies `p.is_relative()`. But there could technically be a platform that defines path semantics differently so
+    // we explicitly enforce our requirement here.
+    if (!p.is_relative())
     {
-        switch (relativePathValidation.GetError())
-        {
-        case ErrorCode_ValidateRelativePathCanBeMadeAbsolute::PathNotRelative:
-            return ErrorCode_MakeAbsoluteUsingBase::PathNotRelative;
-        case ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootName:
-            return ErrorCode_MakeAbsoluteUsingBase::RelativePathHasRootName;
-        case ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootDirectory:
-            return ErrorCode_MakeAbsoluteUsingBase::RelativePathHasRootDirectory;
-        }
+        return ErrorCode_MakeAbsoluteUsingBase::PathNotRelative;
+    }
 
-        assert(false); // Unhandled enum case!
-        std::abort();
+    if (p.has_root_name())
+    {
+        return ErrorCode_MakeAbsoluteUsingBase::RelativePathHasRootName;
+    }
+
+    if (p.has_root_directory())
+    {
+        return ErrorCode_MakeAbsoluteUsingBase::RelativePathHasRootDirectory;
     }
 
     if (!base.is_absolute())
@@ -100,31 +78,6 @@ CppUtils::ExpectedResult<std::filesystem::path, CppUtils::ErrorCode_MakeAbsolute
     }
 
     return base / p;
-}
-
-CppUtils::ExpectedResult<void, CppUtils::ErrorCode_ValidateRelativePathCanBeMadeAbsolute> CppUtils::ValidateRelativePathCanBeMadeAbsolute(
-    const std::filesystem::path& p)
-{
-    // Note: This check is a bit redundant considering the additional checks that follow it since, on the
-    // usual operating systems (POSIX-based and Windows), `!p.has_root_name() && !p.has_root_directory()` already
-    // implies `p.is_relative()`. But there could technically be a platform that defines path semantics differently so
-    // we explicitly enforce our requirement here.
-    if (!p.is_relative())
-    {
-        return ErrorCode_ValidateRelativePathCanBeMadeAbsolute::PathNotRelative;
-    }
-
-    if (p.has_root_name())
-    {
-        return ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootName;
-    }
-
-    if (p.has_root_directory())
-    {
-        return ErrorCode_ValidateRelativePathCanBeMadeAbsolute::RelativePathHasRootDirectory;
-    }
-
-    return {};
 }
 
 std::filesystem::path CppUtils::MakeAbsoluteUsingBase_BoostLogic(

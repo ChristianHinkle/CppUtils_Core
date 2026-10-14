@@ -24,26 +24,23 @@ namespace CppUtils
 
     enum class ErrorCode_MakeAbsolute
     {
-        PathNotRelative,
         RelativePathHasRootName,
-        RelativePathHasRootDirectory,
     };
 
     enum class ErrorCode_MakeAbsoluteWithEc
     {
-        PathNotRelative,
         RelativePathHasRootName,
-        RelativePathHasRootDirectory,
         StdErrorCode,
     };
 
     /**
-     * @brief Makes an absolute path from a relative path, erroring if the given path is not valid for this operation.
+     * @brief Makes an absolute path from the given path, based on the cwd if needed.
+     * @note If the path given is a relative path with a root name, we return an error because it is unclear what the desired
+     *       outcome of that operation would be.
+     * @note This is effectively the same as `std::filesystem::absolute` but errors in the case of relative paths having root names.
      *
      * Required invariants:
-     * - p.is_relative()
-     * - !p.has_root_name()
-     * - !p.has_root_directory()
+     * - !(p.is_relative() && p.has_root_name())
      */
     CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<std::filesystem::path, ErrorCode_MakeAbsolute> MakeAbsolute(
         const std::filesystem::path& p);
@@ -75,19 +72,6 @@ namespace CppUtils
     CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<std::filesystem::path, ErrorCode_MakeAbsoluteUsingBase> MakeAbsoluteUsingBase(
         const std::filesystem::path& p,
         const std::filesystem::path& base);
-
-    enum class ErrorCode_ValidateRelativePathCanBeMadeAbsolute
-    {
-        PathNotRelative,
-        RelativePathHasRootName,
-        RelativePathHasRootDirectory,
-    };
-
-    /**
-     * @brief Test whether a path can successfully be made absolute.
-     */
-    CPPUTILS_CORE_EXPORT CppUtils::ExpectedResult<void, ErrorCode_ValidateRelativePathCanBeMadeAbsolute> ValidateRelativePathCanBeMadeAbsolute(
-        const std::filesystem::path& p);
 
     /**
      * @brief Mirrors the overall logic of Boost.Filesystem's `boost::filesystem::absolute` function, according to their
