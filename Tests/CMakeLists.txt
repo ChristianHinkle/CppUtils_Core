@@ -76,28 +76,28 @@ add_test(
   COMMAND ${my_project_name}_Filesystem_IsRootPath
   )
 
-add_executable(${my_project_name}_Filesystem_StripTrailingSeparator)
-target_compile_features(${my_project_name}_Filesystem_StripTrailingSeparator PUBLIC cxx_std_20)
-target_sources(${my_project_name}_Filesystem_StripTrailingSeparator PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/Filesystem_StripTrailingSeparator.cpp")
-target_link_libraries(${my_project_name}_Filesystem_StripTrailingSeparator
+add_executable(${my_project_name}_Filesystem_TrimTrailingSep)
+target_compile_features(${my_project_name}_Filesystem_TrimTrailingSep PUBLIC cxx_std_20)
+target_sources(${my_project_name}_Filesystem_TrimTrailingSep PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/Filesystem_TrimTrailingSep.cpp")
+target_link_libraries(${my_project_name}_Filesystem_TrimTrailingSep
   PRIVATE
     ${my_project_name_target_alias_format}::Static
   )
 
 add_test(
-  NAME ${my_project_name_test_format}.Filesystem.StripTrailingSeparator
-  COMMAND ${my_project_name}_Filesystem_StripTrailingSeparator
+  NAME ${my_project_name_test_format}.Filesystem.TrimTrailingSep
+  COMMAND ${my_project_name}_Filesystem_TrimTrailingSep
   )
 
-add_executable(${my_project_name}_Filesystem_WithTrailingSeparator)
-target_compile_features(${my_project_name}_Filesystem_WithTrailingSeparator PUBLIC cxx_std_20)
-target_sources(${my_project_name}_Filesystem_WithTrailingSeparator PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/Filesystem_WithTrailingSeparator.cpp")
-target_link_libraries(${my_project_name}_Filesystem_WithTrailingSeparator
+add_executable(${my_project_name}_Filesystem_WithTrailingSep)
+target_compile_features(${my_project_name}_Filesystem_WithTrailingSep PUBLIC cxx_std_20)
+target_sources(${my_project_name}_Filesystem_WithTrailingSep PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/Filesystem_WithTrailingSep.cpp")
+target_link_libraries(${my_project_name}_Filesystem_WithTrailingSep
   PRIVATE
     ${my_project_name_target_alias_format}::Static
   )
 
 add_test(
-  NAME ${my_project_name_test_format}.Filesystem.WithTrailingSeparator
-  COMMAND ${my_project_name}_Filesystem_WithTrailingSeparator
+  NAME ${my_project_name_test_format}.Filesystem.WithTrailingSep
+  COMMAND ${my_project_name}_Filesystem_WithTrailingSep
   )

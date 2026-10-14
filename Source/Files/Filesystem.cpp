@@ -112,13 +112,13 @@ bool CppUtils::IsRootPath(const std::filesystem::path& p)
     return isRootPath;
 }
 
-std::filesystem::path CppUtils::StripTrailingSeparator(const std::filesystem::path& p)
+std::filesystem::path CppUtils::TrimTrailingSep(const std::filesystem::path& p)
 {
-    return StripTrailingSeparator(std::filesystem::path{p});
+    return TrimTrailingSep(std::filesystem::path{p});
 }
-std::filesystem::path CppUtils::StripTrailingSeparator(std::filesystem::path&& p)
+std::filesystem::path CppUtils::TrimTrailingSep(std::filesystem::path&& p)
 {
-    if (CanStripTrailingSeparator(p))
+    if (CanTrimTrailingSep(p))
     {
         // TODO: [todo] We should make a version of `parent_path` that supports in-place modification and move semantics. Because
         // right now this move isn't doing anything since they don't have an rvalue overload.
@@ -128,13 +128,13 @@ std::filesystem::path CppUtils::StripTrailingSeparator(std::filesystem::path&& p
     return p;
 }
 
-std::filesystem::path CppUtils::WithTrailingSeparator(const std::filesystem::path& p)
+std::filesystem::path CppUtils::WithTrailingSep(const std::filesystem::path& p)
 {
-    return WithTrailingSeparator(std::filesystem::path{p});
+    return WithTrailingSep(std::filesystem::path{p});
 }
-std::filesystem::path CppUtils::WithTrailingSeparator(std::filesystem::path&& p)
+std::filesystem::path CppUtils::WithTrailingSep(std::filesystem::path&& p)
 {
-    if (CanAddTrailingSeparator(p))
+    if (CanAddTrailingSep(p))
     {
         return std::move(p.operator/=(std::filesystem::path{}));
     }
@@ -142,12 +142,12 @@ std::filesystem::path CppUtils::WithTrailingSeparator(std::filesystem::path&& p)
     return p;
 }
 
-bool CppUtils::CanStripTrailingSeparator(const std::filesystem::path& p)
+bool CppUtils::CanTrimTrailingSep(const std::filesystem::path& p)
 {
     return p.has_relative_path() && !p.has_filename();
 }
 
-bool CppUtils::CanAddTrailingSeparator(const std::filesystem::path& p)
+bool CppUtils::CanAddTrailingSep(const std::filesystem::path& p)
 {
     return p.has_relative_path() && p.has_filename();
 }

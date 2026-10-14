@@ -24,7 +24,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "/MyDir";
         assert(inputPath == "/MyDir"); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "/MyDir/";
         assert(inputPath == "/MyDir/"); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "";
         assert(inputPath == ""); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "/";
         assert(inputPath == "/"); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -88,7 +88,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "MyDir";
         assert(inputPath == "MyDir"); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
         std::filesystem::path inputPath = "MyDir/";
         assert(inputPath == "MyDir/"); // Quick sanity check before proceeding.
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -119,7 +119,7 @@ int main(int argc, char** argv)
     {
         std::filesystem::path inputPath = std::filesystem::absolute("/MyDir");
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
     {
         std::filesystem::path inputPath = std::filesystem::absolute("/MyDir/");
 
-        std::filesystem::path resultPath = CppUtils::WithTrailingSeparator(inputPath);
+        std::filesystem::path resultPath = CppUtils::WithTrailingSep(inputPath);
 
         ++errorCase;
         PrintCaseData(errorCase, inputPath, resultPath);

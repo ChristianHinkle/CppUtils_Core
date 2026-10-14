@@ -99,27 +99,27 @@ namespace CppUtils
      * @brief Remove the trailing separator, if present.
      * @note Root paths are left unchanged.
      */
-    CPPUTILS_CORE_EXPORT std::filesystem::path StripTrailingSeparator(const std::filesystem::path& p);
-    CPPUTILS_CORE_EXPORT std::filesystem::path StripTrailingSeparator(std::filesystem::path&& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path TrimTrailingSep(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path TrimTrailingSep(std::filesystem::path&& p);
 
     /**
      * @brief Add the trailing separator, if not already present.
      * @note Root paths and empty paths are left unchanged.
      */
-    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSeparator(const std::filesystem::path& p);
-    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSeparator(std::filesystem::path&& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSep(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT std::filesystem::path WithTrailingSep(std::filesystem::path&& p);
 
     /**
-     * @brief Whether this path has a trailing separator that can be stripped.
+     * @brief Whether this path has a trailing separator that can be trimmed.
      * @return `false` for root paths and paths that do not have a trailing separator.
      */
-    CPPUTILS_CORE_EXPORT bool CanStripTrailingSeparator(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT bool CanTrimTrailingSep(const std::filesystem::path& p);
 
     /**
      * @brief Whether a trailing separator be added to this path.
      * @return `false` for root paths, empty paths, and paths that already have a trailing separator.
      */
-    CPPUTILS_CORE_EXPORT bool CanAddTrailingSeparator(const std::filesystem::path& p);
+    CPPUTILS_CORE_EXPORT bool CanAddTrailingSep(const std::filesystem::path& p);
 
     /**
      * @brief A character that represents the most widely-accepted path separator across all platforms.
