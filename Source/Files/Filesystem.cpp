@@ -144,6 +144,11 @@ std::filesystem::path CppUtils::MakeAbsoluteUsingBase_BoostLogic(
     return Internal_MakeAbsoluteUsingBase_BoostLogic<shouldUseEc>(p, base, ec);
 }
 
+bool CppUtils::IsRootPath(const std::filesystem::path& p)
+{
+    return p.has_root_directory() && p == p.root_path();
+}
+
 CppUtils::StdPathStringView CppUtils::GetStringViewFromPath(const std::filesystem::path& path)
 {
     return StdPathStringView(path.native().c_str(), path.native().length());

@@ -106,6 +106,12 @@ namespace CppUtils
         std::error_code& ec);
 
     /**
+     * @brief Returns true for any path is a root path (not necessarily an absolute path). E.g., on Windows, the
+     *        paths "/" and "C:/" are both "root paths" even though only the one specifying a root name is an absolute path.
+     */
+    CPPUTILS_CORE_EXPORT bool IsRootPath(const std::filesystem::path& p);
+
+    /**
      * @brief A character that represents the most widely-accepted path separator across all platforms.
      */
     template <CppUtils::CharLike TChar = FilesystemCharType>

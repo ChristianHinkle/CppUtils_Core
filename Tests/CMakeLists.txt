@@ -62,3 +62,16 @@ add_test(
   NAME ${my_project_name_test_format}.Filesystem.MakeAbsoluteUsingBase
   COMMAND ${my_project_name}_Filesystem_MakeAbsoluteUsingBase
   )
+
+add_executable(${my_project_name}_Filesystem_IsRootPath)
+target_compile_features(${my_project_name}_Filesystem_IsRootPath PUBLIC cxx_std_20)
+target_sources(${my_project_name}_Filesystem_IsRootPath PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source/Filesystem_IsRootPath.cpp")
+target_link_libraries(${my_project_name}_Filesystem_IsRootPath
+  PRIVATE
+    ${my_project_name_target_alias_format}::Static
+  )
+
+add_test(
+  NAME ${my_project_name_test_format}.Filesystem.IsRootPath
+  COMMAND ${my_project_name}_Filesystem_IsRootPath
+  )
