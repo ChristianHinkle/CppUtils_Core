@@ -146,7 +146,17 @@ std::filesystem::path CppUtils::MakeAbsoluteUsingBase_BoostLogic(
 
 bool CppUtils::IsRootPath(const std::filesystem::path& p)
 {
-    return p.has_root_directory() && p == p.root_path();
+    const bool isRootPath = p.has_root_directory() && !p.has_relative_path();
+
+#ifndef NDEBUG
+    if (isRootPath)
+    {
+        // Ensure our logic is consistent.
+        assert(p == p.root_path());
+    }
+#endif
+
+    return isRootPath;
 }
 
 CppUtils::StdPathStringView CppUtils::GetStringViewFromPath(const std::filesystem::path& path)
