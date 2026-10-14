@@ -165,7 +165,7 @@ std::filesystem::path CppUtils::StripTrailingSeparator(const std::filesystem::pa
 }
 std::filesystem::path CppUtils::StripTrailingSeparator(std::filesystem::path&& p)
 {
-    if (p.has_relative_path() && !p.has_filename())
+    if (CanStripTrailingSeparator(p))
     {
         // TODO: [todo] We should make a version of `parent_path` that supports in-place modification and move semantics. Because
         // right now this move isn't doing anything since they don't have an rvalue overload.
@@ -181,12 +181,22 @@ std::filesystem::path CppUtils::WithTrailingSeparator(const std::filesystem::pat
 }
 std::filesystem::path CppUtils::WithTrailingSeparator(std::filesystem::path&& p)
 {
-    if (p.has_relative_path() && p.has_filename())
+    if (CanAddTrailingSeparator(p))
     {
         return std::move(p.operator/=(std::filesystem::path{}));
     }
 
     return p;
+}
+
+bool CppUtils::CanStripTrailingSeparator(const std::filesystem::path& p)
+{
+    return p.has_relative_path() && !p.has_filename();
+}
+
+bool CppUtils::CanAddTrailingSeparator(const std::filesystem::path& p)
+{
+    return p.has_relative_path() && p.has_filename();
 }
 
 CppUtils::StdPathStringView CppUtils::GetStringViewFromPath(const std::filesystem::path& path)
